@@ -1,0 +1,133 @@
+@import 'tailwindcss';
+@import '../../vendor/livewire/flux/dist/flux.css';
+
+@source "../views";
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../vendor/livewire/flux-pro/stubs/**/*.blade.php';
+@source '../../vendor/livewire/flux/stubs/**/*.blade.php';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+
+    --color-zinc-50: #fafafa;
+    --color-zinc-100: #f5f5f5;
+    --color-zinc-200: #e5e5e5;
+    --color-zinc-300: #d4d4d4;
+    --color-zinc-400: #a3a3a3;
+    --color-zinc-500: #737373;
+    --color-zinc-600: #525252;
+    --color-zinc-700: #404040;
+    --color-zinc-800: #262626;
+    --color-zinc-900: #171717;
+    --color-zinc-950: #0a0a0a;
+      
+
+    --color-accent: var(--color-neutral-800);
+    --color-accent-content: var(--color-neutral-800);
+    --color-accent-foreground: var(--color-white);
+}
+
+@layer theme {
+    .dark {
+        --color-accent: var(--color-white);
+        --color-accent-content: var(--color-white);
+        --color-accent-foreground: var(--color-neutral-800);
+    }
+}
+
+@layer base {
+
+    *,
+    ::after,
+    ::before,
+    ::backdrop,
+    ::file-selector-button {
+        border-color: var(--color-gray-200, currentColor);
+    }
+}
+
+[data-flux-field] {
+    @apply grid gap-2;
+}
+
+[data-flux-label] {
+    @apply  !mb-0 !leading-tight;
+}
+
+input:focus[data-flux-control],
+textarea:focus[data-flux-control],
+select:focus[data-flux-control] {
+    @apply outline-hidden ring-2 ring-accent ring-offset-2 ring-offset-accent-foreground;
+}
+
+/* \[:where(&)\]:size-4 {
+    @apply size-4;
+} */
+
+
+/* Datatables additional styles */
+
+
+.dt-paging-button {
+    @apply px-3 py-0.5 dark:bg-zinc-800 cursor-pointer;
+}
+
+.dt-paging-button.current {
+    @apply dark:bg-zinc-700 bg-zinc-200;
+}
+
+.dt-paging-button:hover{
+    @apply dark:bg-zinc-700 bg-zinc-200;
+}
+
+.dataTable td {
+    @apply px-1 py-2;
+}
+
+.dataTable thead, 
+.dataTable tfoot {
+    @apply uppercase leading-1 text-sm;
+}
+
+.dataTable th{
+    @apply px-1 py-3 border-y dark:border-y-zinc-700 border-y-zinc-200 text-start;
+}
+
+.dataTable tr:nth-child(even) {
+    @apply dark:bg-zinc-700 bg-zinc-200;
+}
+
+.dt-container {
+    @apply shadow dark:border dark:border-zinc-700 border-zinc-200 px-5 py-4 rounded-lg w-full overflow-x-auto;
+}
+
+.dt-layout-row {
+    @apply w-full flex items-center justify-between mb-4 mt-4;
+}
+
+.dt-layout-full{
+   @apply w-full;
+}
+.dt-input {
+    @apply border dark:border-zinc-700 border-zinc-200 rounded py-1 px-0.5;
+}
+
+.dt-empty {
+    @apply text-center;
+}
+select.dt-input {
+    @apply dark:bg-zinc-700 bg-zinc-100;
+}
+
+select.dt-input option{
+    @apply dark:bg-zinc-700 hover:dark:bg-zinc-600 bg-zinc-100 hover:bg-zinc-200 dark:text-zinc-100 text-accent border-0 cursor-pointer;
+}
+
+@media screen and (max-width: 600px) {
+    .dt-layout-row {
+        @apply w-full flex flex-col gap-8 items-center justify-between mb-4 mt-4;
+    }
+}
+ 
