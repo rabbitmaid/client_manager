@@ -8,12 +8,11 @@
 
         <div class="mt-5 w-full max-w-lg">
             <section class="w-full">
+
+
+               <livewire:dashboard.admin.users.create />
             
-                <flux:field>
-                        <flux:label>Email</flux:label>
-                        <flux:input wire:model="email" type="email" />
-                        <flux:error name="email" />
-                </flux:field>
+
             
             </section>
         </div>
