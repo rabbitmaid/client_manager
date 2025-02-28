@@ -35,9 +35,16 @@
             @endif
 
             <flux:navlist.group expandable heading="Users" :expanded="request()->routeIs('admin.dashboard.users*')"  variant="outline">
-                <flux:navlist.item href="{{ route('admin.dashboard.users') }}" icon="user"  :current="request()->routeIs('admin.dashboard.users')" wire:navigate>All Users</flux:navlist.item>
+                <flux:navlist.item href="{{ route('admin.dashboard.users') }}" icon="user-group"  :current="request()->routeIs('admin.dashboard.users')" wire:navigate>All Users</flux:navlist.item>
                 <flux:navlist.item href="{{ route('admin.dashboard.users.create') }}" icon="plus" :current="request()->routeIs('admin.dashboard.users.create')" wire:navigate>Add User</flux:navlist.item>
             </flux:navlist.group>
+
+
+            <flux:navlist variant="outline">
+                <flux:navlist.group heading="Roles and Permission" class="grid">
+                    <flux:navlist.item icon="finger-print" :href="route('admin.dashboard.roles')" :current="request()->routeIs('admin.dashboard.roles')" wire:navigate>{{ __('Roles') }}</flux:navlist.item>
+                </flux:navlist.group>
+            </flux:navlist>
 
 
             <flux:spacer />

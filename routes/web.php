@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\Dashboard\Admin\UserController;
-use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Dashboard\Admin\RoleController;
+use App\Http\Controllers\Dashboard\Admin\UserController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -34,6 +35,15 @@ Route::prefix('admin')->group(function() {
     Route::get('users/role/{id}', [UserController::class, 'role'])
         ->middleware(['auth', 'verified'])
         ->name('admin.dashboard.users.role');
+
+    
+    Route::get('roles', [RoleController::class, 'index'])
+        ->middleware(['auth', 'verified'])
+        ->name('admin.dashboard.roles');
+
+    Route::get('roles/permissions/{id}', [RoleController::class, 'permission'])
+        ->middleware(['auth', 'verified'])
+        ->name('admin.dashboard.roles.permission');
 
 });
 
