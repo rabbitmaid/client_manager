@@ -8,7 +8,7 @@
             <flux:sidebar.toggle class="lg:hidden" icon="x-mark" />
 
 
-            @if(auth()->user()->hasRole(\App\Helpers\Roles::ADMINISTRATOR)):
+            @if(auth()->user()->hasRole(\App\Helpers\Roles::ADMINISTRATOR))
 
                 <a href="{{ route('admin.dashboard') }}" class="mr-5 flex items-center space-x-2" wire:navigate>
                     <x-app-logo class="size-8" href="#"></x-app-logo>

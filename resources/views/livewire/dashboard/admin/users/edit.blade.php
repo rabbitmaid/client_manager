@@ -31,17 +31,19 @@
     </section>
 
 
+    <flux:separator variant="subtle" class="mb-5" />
+
+
     <section>
 
         <flux:heading size="lg" level="3" class="mb-5">Change Password</flux:heading>
 
-        <form wire:submit.prevent='changePassword'>
-        
+        <form wire:submit.prevent='changePassword({{ $id }})'>
+
             <flux:field class="mb-5">
                     <flux:label>New Password</flux:label>
                     <flux:input type="password" wire:model='password' />
                     <flux:error name="password" />
-                    <flux:description>Must be at least 8 characters long, include an uppercase letter, a number, and a special character.</flux:description>
             </flux:field>
         
             <flux:field class="mb-5">

@@ -8,6 +8,8 @@ use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules\Password;
+use Illuminate\Validation\ValidationException;
 
 class Edit extends Component
 {   
@@ -43,12 +45,26 @@ class Edit extends Component
             'is_active' => $validated['is_active'] === 'active' ? true : false
         ]);
 
+        if ($user->isDirty('email')) {
+            $user->email_verified_at = null;
+        }
+
         $this->redirect(route('admin.dashboard.users', absolute: false), navigate: true);
     }
 
-    public function changePassword()
+    public function changePassword(int $id)
     {
+        $validated = $this->validate([
+            'password' => ['required', 'string', Password::defaults(), 'confirmed'],
+        ]);
 
+        $user = User::find($id);
+
+        $user->update([
+            'password' => Hash::make($validated['password']),
+        ]);
+
+        $this->redirect(route('admin.dashboard.users.edit', $user->id), navigate: true);
     }
 
     public function render()
