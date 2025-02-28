@@ -10,7 +10,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::latest()->get();
+        $users = User::orderBy('id', 'DESC')->get();
 
         return view('dashboard.admin.users.index', [
             'users' => $users
@@ -28,9 +28,9 @@ class UserController extends Controller
         return view('dashboard.admin.users.edit', ['user' => $user]);
     }
 
-    public function permission(int $id)
+    public function role(int $id)
     {
         $user = User::findOrFail($id);
-        return view('dashboard.admin.users.permission', ['user' => $user]);
+        return view('dashboard.admin.users.role', ['user' => $user]);
     }
 }

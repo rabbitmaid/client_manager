@@ -6,7 +6,7 @@ use App\Models\User;
 use Livewire\Component;
 use Illuminate\Support\Collection;
 
-class Permission extends Component
+class Role extends Component
 {
     public $id;
     public array $roles;
@@ -67,6 +67,6 @@ class Permission extends Component
 
     public function render()
     {
-        return view('livewire.dashboard.admin.users.permission');
+        return view('livewire.dashboard.admin.users.role');
     }
 }

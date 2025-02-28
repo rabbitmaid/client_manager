@@ -11,6 +11,7 @@
             <table class="dt-table display" style="width:100%">
                 <thead>
                     <tr>
+                        <th>#</th>
                         <th>Name</th>
                         <th>Email</th>
                         <th>Roles</th>
@@ -27,6 +28,7 @@
                     @foreach($users as $user)
                         
                         <tr>
+                            <td>{{ $loop->iteration }}</td>
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
                             <td>
@@ -77,12 +79,16 @@
 
                                                 <flux:menu.separator />
 
-                                                <flux:menu.item href="{{ route('admin.dashboard.users.permission', $user->id) }}" icon="lock-closed" class="cursor-pointer">Permission</flux:menu.item>
+                                                @can('manage users roles')
+                                                
+                                                    <flux:menu.item href="{{ route('admin.dashboard.users.role', $user->id) }}" icon="lock-closed" class="cursor-pointer">Roles</flux:menu.item>
+                                                    
+                                                @endcan
 
                                                 <flux:menu.separator />
 
                                                 @can('delete users')
-                                                    <flux:menu.item href="#" variant="danger" icon="trash" class="cursor-pointer">Delete</flux:menu.item>
+                                                   <livewire:dashboard.admin.users.delete :id="$user->id" />
                                                 @endcan
                                                     
                                             </flux:menu>
@@ -101,6 +107,7 @@
                 </tbody>
                 <tfoot>
                     <tr>
+                        <th>#</th>
                         <th>Name</th>
                         <th>Email</th>
                         <th>Roles</th>

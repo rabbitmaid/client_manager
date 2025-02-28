@@ -26,6 +26,7 @@ class RoleAndPermissionSeeder extends Seeder
             ['name' => 'create users'],
             ['name' => 'update users'],
             ['name' => 'delete users'],
+            ['name' => 'manage users roles']
         ];
 
         foreach($roles as $role){
