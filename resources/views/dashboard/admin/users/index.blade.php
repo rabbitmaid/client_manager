@@ -75,17 +75,16 @@
                                             <flux:menu>
                                                 @can('update users')
                                                     <flux:menu.item href="{{ route('admin.dashboard.users.edit', $user->id) }}"  icon="pencil" class="cursor-pointer">Edit</flux:menu.item>
+                                                    <flux:menu.separator />
                                                 @endcan
 
-                                                <flux:menu.separator />
 
                                                 @can('manage users roles')
                                                 
                                                     <flux:menu.item href="{{ route('admin.dashboard.users.role', $user->id) }}" icon="finger-print" class="cursor-pointer">Roles</flux:menu.item>
-                                                    
+                                                    <flux:menu.separator />
                                                 @endcan
 
-                                                <flux:menu.separator />
 
                                                 @can('delete users')
                                                    <livewire:dashboard.admin.users.delete :id="$user->id" />
