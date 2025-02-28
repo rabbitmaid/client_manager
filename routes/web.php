@@ -9,12 +9,15 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-Route::view('dashboard', 'dashboard.client.index')
-    ->middleware(['auth', 'verified'])
-    ->name('client.dashboard');
 
 
-Route::prefix('admin')->middleware(['auth', 'verified', 'admin'])->group(function() {
+Route::prefix('dashboard')->middleware(['auth', 'verified'])->group(function() {
+    Route::view('dashboard', 'dashboard.client.index')->name('client.dashboard');
+});
+
+
+
+Route::prefix('admin')->middleware(['auth', 'verified'])->group(function() {
 
     Route::view('', 'dashboard.admin.index')->name('admin.dashboard');
 
@@ -28,10 +31,10 @@ Route::prefix('admin')->middleware(['auth', 'verified', 'admin'])->group(functio
 
     Route::get('roles', [RoleController::class, 'index'])->name('admin.dashboard.roles');
 
-    Route::get('roles/permissions/{id}', [RoleController::class, 'permission'])->name('admin.dashboard.roles.permission');
+    Route::get('roles/permissions/{id}', [RoleController::class, 'permission'])
+->name('admin.dashboard.roles.permission');
 
 });
-
     
 
 Route::middleware(['auth'])->group(function () {

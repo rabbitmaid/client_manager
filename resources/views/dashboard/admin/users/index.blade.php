@@ -74,16 +74,18 @@
                                     
                                             <flux:menu>
                                                 @can('update users')
-                                                    <flux:menu.item href="{{ route('admin.dashboard.users.edit', $user->id) }}"  icon="pencil" class="cursor-pointer">Edit</flux:menu.item>
+                                                    <flux:menu.item href="{{ route('admin.dashboard.users.edit', $user->id) }}" wire:navigate='true'  icon="pencil" class="cursor-pointer">Edit</flux:menu.item>
                                                     <flux:menu.separator />
                                                 @endcan
 
-
-                                                @can('manage users roles')
-                                                
-                                                    <flux:menu.item href="{{ route('admin.dashboard.users.role', $user->id) }}" icon="finger-print" class="cursor-pointer">Roles</flux:menu.item>
-                                                    <flux:menu.separator />
-                                                @endcan
+                                                {{-- Do not change role of client --}}
+                                                @if(!$user->hasRole('client'))
+                                                    @can('manage users roles')
+                                                    
+                                                        <flux:menu.item href="{{ route('admin.dashboard.users.role', $user->id) }}" wire:navigate='true'   icon="finger-print" class="cursor-pointer">Roles</flux:menu.item>
+                                                        <flux:menu.separator />
+                                                    @endcan
+                                                @endif
 
 
                                                 @can('delete users')

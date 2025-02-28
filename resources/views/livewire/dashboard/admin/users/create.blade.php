@@ -26,7 +26,7 @@
         <flux:select label="Role" wire:model='role'>
             <option selected value="{{ \App\Helpers\Roles::ADMINISTRATOR }}">administrator</option>
             <option value="{{ \App\Helpers\Roles::STAFF }}">staff</option>
-            <option value="{{ \App\Helpers\Roles::CLIENT }}">client</option>
+            {{-- <option value="{{ \App\Helpers\Roles::CLIENT }}">client</option> --}}
         </flux:select>
     </flux:field>
 

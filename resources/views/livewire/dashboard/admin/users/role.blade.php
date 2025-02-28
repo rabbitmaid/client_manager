@@ -7,9 +7,9 @@
                 <flux:switch wire:model.live="{{ $savedRole->name }}" wire:change="setAdministrator" label="{{ strtoupper( $savedRole->name ) }}"  align="left" class="mb-3" checked />
             @endif
 
-            @if($savedRole->name === \App\Helpers\Roles::CLIENT)
+            {{-- @if($savedRole->name === \App\Helpers\Roles::CLIENT)
                 <flux:switch wire:model.live="{{ $savedRole->name }}" wire:change="setClient" label="{{ strtoupper( $savedRole->name ) }}"  align="left" class="mb-3" checked />
-            @endif
+            @endif --}}
 
             @if($savedRole->name === \App\Helpers\Roles::STAFF)
                 <flux:switch wire:model.live="{{ $savedRole->name }}" wire:change="setStaff" label="{{ strtoupper( $savedRole->name ) }}"  align="left" class="mb-3" checked />
@@ -21,9 +21,9 @@
                 <flux:switch wire:model.live="{{ $savedRole->name }}" wire:change="setAdministrator" label="{{ strtoupper( $savedRole->name ) }}"  align="left" class="mb-3" />
             @endif
 
-            @if($savedRole->name === \App\Helpers\Roles::CLIENT)
+            {{-- @if($savedRole->name === \App\Helpers\Roles::CLIENT)
                 <flux:switch wire:model.live="{{ $savedRole->name }}" wire:change="setClient" label="{{ strtoupper( $savedRole->name ) }}"  align="left" class="mb-3" />
-            @endif
+            @endif --}}
 
             @if($savedRole->name === \App\Helpers\Roles::STAFF)
                 <flux:switch wire:model.live="{{ $savedRole->name }}" wire:change="setStaff" label="{{ strtoupper( $savedRole->name ) }}"  align="left" class="mb-3" />

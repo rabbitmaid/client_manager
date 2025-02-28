@@ -11,7 +11,7 @@ class RoleController extends Controller
 {
     public function index()
     {
-        $roles = Role::all();
+        $roles = Role::whereNot('name', 'client')->get();
 
         return view('dashboard.admin.roles.index', [
             'roles' => $roles

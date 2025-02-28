@@ -8,19 +8,7 @@
             <flux:sidebar.toggle class="lg:hidden" icon="x-mark" />
 
 
-            @if(auth()->user()->hasRole(\App\Helpers\Roles::ADMINISTRATOR))
-
-                <a href="{{ route('admin.dashboard') }}" class="mr-5 flex items-center space-x-2" wire:navigate>
-                    <x-app-logo class="size-8" href="#"></x-app-logo>
-                </a>
-
-                <flux:navlist variant="outline">
-                    <flux:navlist.group heading="Platform" class="grid">
-                        <flux:navlist.item icon="home" :href="route('admin.dashboard')" :current="request()->routeIs('admin.dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
-                    </flux:navlist.group>
-                </flux:navlist>
-
-            @else
+            @if(auth()->user()->hasRole(\App\Helpers\Roles::CLIENT))
 
                 <a href="{{ route('client.dashboard') }}" class="mr-5 flex items-center space-x-2" wire:navigate>
                     <x-app-logo class="size-8" href="#"></x-app-logo>
@@ -29,6 +17,18 @@
                 <flux:navlist variant="outline">
                     <flux:navlist.group heading="Platform" class="grid">
                         <flux:navlist.item icon="home" :href="route('client.dashboard')" :current="request()->routeIs('client.dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
+                    </flux:navlist.group>
+                </flux:navlist>
+
+            @else
+
+                <a href="{{ route('admin.dashboard') }}" class="mr-5 flex items-center space-x-2" wire:navigate>
+                    <x-app-logo class="size-8" href="#"></x-app-logo>
+                </a>
+
+                <flux:navlist variant="outline">
+                    <flux:navlist.group heading="Platform" class="grid">
+                        <flux:navlist.item icon="home" :href="route('admin.dashboard')" :current="request()->routeIs('admin.dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
                     </flux:navlist.group>
                 </flux:navlist>
 
