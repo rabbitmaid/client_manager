@@ -16,25 +16,14 @@ class Edit extends Component
     public string $email = '';
     public string $password = '';
     public string $password_confirmation = '';
-    public array $existingRoles;
-    public array $roles;
-    public Collection $savedRoles;
+    public string $is_active;
 
     public function mount()
     {
         $user = User::find($this->id);
         $this->name = $user->name;
         $this->email = $user->email;
-
-        // keep track of user existing roles
-        $this->existingRoles = $user->getRoleNames()->toArray();
-
-        // Roles to update
-        $this->roles = $user->getRoleNames()->toArray();
-
-        // All roles
-        $this->savedRoles = \Spatie\Permission\Models\Role::all();
-    
+        $this->is_active = $user->is_active == true ? 'active' : 'not_active';
     }
 
     public function update(int $id)
@@ -43,27 +32,16 @@ class Edit extends Component
         $validated = $this->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique(User::class)->ignore($id)],
-            'roles' => ['required'],
+            'is_active' => ['required'],
         ]);
 
         $user = User::find($id);
 
         $user->update([
             'name' => $validated['name'],
-            'email' => $validated['email']
+            'email' => $validated['email'],
+            'is_active' => $validated['is_active'] === 'active' ? true : false
         ]);
-
-        // If there is a role that is not selected now, remove it
-        foreach($this->existingRoles as $role) {
-            if(!in_array($role, $this->roles)) {
-                $user->removeRole($role);
-            }
-        }
-        
-        // Assign new roles to user
-        foreach($validated['roles'] as $role){
-            $user->assignRole($role);
-        }
 
         $this->redirect(route('admin.dashboard.users', absolute: false), navigate: true);
     }

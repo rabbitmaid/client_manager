@@ -36,7 +36,7 @@
 
             <flux:navlist.group expandable heading="Users" :expanded="request()->routeIs('admin.dashboard.users*')"  variant="outline">
                 <flux:navlist.item href="{{ route('admin.dashboard.users') }}" icon="user"  :current="request()->routeIs('admin.dashboard.users')" wire:navigate>All Users</flux:navlist.item>
-                <flux:navlist.item href="{{ route('admin.dashboard.users.create') }}" icon="user-plus" :current="request()->routeIs('admin.dashboard.users.create')" wire:navigate>Add User</flux:navlist.item>
+                <flux:navlist.item href="{{ route('admin.dashboard.users.create') }}" icon="plus" :current="request()->routeIs('admin.dashboard.users.create')" wire:navigate>Add User</flux:navlist.item>
             </flux:navlist.group>
 
 

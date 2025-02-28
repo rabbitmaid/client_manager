@@ -13,7 +13,7 @@
                     <tr>
                         <th>Name</th>
                         <th>Email</th>
-                        <th>Role</th>
+                        <th>Roles</th>
                         <th>Email Verification</th>
                         <th>Account</th>
                         <th>Created</th>
@@ -54,7 +54,7 @@
                                 @endif
                             </td>
                             <td>
-                                @if($user->is_active === false)
+                                @if($user->is_active == false)
                                     <flux:badge color="red" class="uppercase text-xs">Not Active</flux:badge>
                                 @else 
                                     <flux:badge color="green" class="uppercase text-xs">Active</flux:badge>
@@ -62,17 +62,33 @@
                             </td>
                             <td>{{ $user->created_at->diffForHumans() }}</td>
                             <td>
-                                <flux:dropdown>
-                                    <flux:button icon-trailing="chevron-down">
-                                        <flux:icon.adjustments-horizontal />
-                                    </flux:button>
+                           
+                                    <flux:dropdown>
+                                    
+                                            <flux:button icon-trailing="chevron-down"  class="cursor-pointer">
+                                                <flux:icon.adjustments-horizontal />
+                                            </flux:button>
+                                
+                                    
+                                            <flux:menu>
+                                                @can('update users')
+                                                    <flux:menu.item href="{{ route('admin.dashboard.users.edit', $user->id) }}"  icon="pencil" class="cursor-pointer">Edit</flux:menu.item>
+                                                @endcan
 
-                                    <flux:menu>
-                                        <flux:menu.item href="{{ route('admin.dashboard.users.edit', $user->id) }}"  icon="pencil" class="cursor-pointer">Edit</flux:menu.item>
-                                        <flux:menu.separator />
-                                        <flux:menu.item href="#" variant="danger" icon="trash" class="cursor-pointer">Delete</flux:menu.item>
-                                    </flux:menu>
-                                </flux:dropdown>
+                                                <flux:menu.separator />
+
+                                                <flux:menu.item href="{{ route('admin.dashboard.users.permission', $user->id) }}" icon="lock-closed" class="cursor-pointer">Permission</flux:menu.item>
+
+                                                <flux:menu.separator />
+
+                                                @can('delete users')
+                                                    <flux:menu.item href="#" variant="danger" icon="trash" class="cursor-pointer">Delete</flux:menu.item>
+                                                @endcan
+                                                    
+                                            </flux:menu>
+                                    
+                                    </flux:dropdown>
+                          
                             </td>
                         </tr>
     
@@ -87,7 +103,7 @@
                     <tr>
                         <th>Name</th>
                         <th>Email</th>
-                        <th>Role</th>
+                        <th>Roles</th>
                         <th>Email Verification</th>
                         <th>Account</th>
                         <th>Created</th>

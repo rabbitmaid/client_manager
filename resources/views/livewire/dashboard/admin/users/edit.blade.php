@@ -13,20 +13,16 @@
                     <flux:input wire:model="email" type="email" placeholder="example@email.com" />
                     <flux:error name="email" />
             </flux:field>
-        
-            <flux:field class="mb-8">
-                <flux:select label="Role" wire:model='roles' class="h-auto" multiple>
 
-                    @foreach ($savedRoles as $savedRole)
-                        @if(in_array($savedRole->name, $roles))
-                            <option selected value="{{ $savedRole->name }}">{{ $savedRole->name }}</option>
-                        @else
-                            <option value="{{ $savedRole->name }}">{{ $savedRole->name }}</option>
-                        @endif
-                    @endforeach
+            <flux:field class="mb-8">
+                <flux:select label="Account" wire:model='is_active'>
+
+                    <option value="active" {{ $is_active == 'active' ? 'selected': '' }}>Active</option>
+                    <option value="not_active" {{ $is_active == 'not_active' ? 'selected': '' }}>Not Active</option>
                     
                 </flux:select>
             </flux:field>
+    
         
             <flux:button variant="primary" type="submit" class="block uppercase text-xs font-semibold tracking-widest cursor-pointer">Update</flux:button>
         

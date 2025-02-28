@@ -27,4 +27,10 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         return view('dashboard.admin.users.edit', ['user' => $user]);
     }
+
+    public function permission(int $id)
+    {
+        $user = User::findOrFail($id);
+        return view('dashboard.admin.users.permission', ['user' => $user]);
+    }
 }
