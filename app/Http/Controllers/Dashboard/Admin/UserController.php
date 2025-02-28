@@ -21,4 +21,10 @@ class UserController extends Controller
     {
         return view('dashboard.admin.users.create');
     }
+
+    public function edit(int $id)
+    {
+        $user = User::findOrFail($id);
+        return view('dashboard.admin.users.edit', ['user' => $user]);
+    }
 }

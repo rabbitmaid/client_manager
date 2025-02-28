@@ -92,7 +92,7 @@ select:focus[data-flux-control] {
 }
 
 .dataTable th{
-    @apply px-1 py-3 border-y dark:border-y-zinc-700 border-y-zinc-200 text-start;
+    @apply px-1 py-5 border-y dark:border-y-zinc-700 border-y-zinc-200 text-start;
 }
 
 .dataTable tr:nth-child(even) {

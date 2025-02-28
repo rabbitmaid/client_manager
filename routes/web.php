@@ -27,6 +27,10 @@ Route::prefix('admin')->group(function() {
         ->middleware(['auth', 'verified'])
         ->name('admin.dashboard.users.create');
 
+    Route::get('users/edit/{id}', [UserController::class, 'edit'])
+        ->middleware(['auth', 'verified'])
+        ->name('admin.dashboard.users.edit');
+
 });
 
     

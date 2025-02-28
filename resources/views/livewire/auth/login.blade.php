@@ -40,7 +40,7 @@ new #[Layout('components.layouts.auth')] class extends Component {
         RateLimiter::clear($this->throttleKey());
         Session::regenerate();
 
-        if($user->hasRole(\App\Helpers\Roles::ADMINISTRATOR) || $user->hasRole(\App\Helpers\Roles::STAFF)){
+        if(Auth::user()->hasRole(\App\Helpers\Roles::ADMINISTRATOR) || Auth::user()->hasRole(\App\Helpers\Roles::STAFF)){
             $this->redirectIntended(default: route('admin.dashboard', absolute: false), navigate: true);
         }
         else {
