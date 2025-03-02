@@ -36,23 +36,42 @@
 
             @can('manage users')
 
-                <flux:navlist.group expandable heading="Users" :expanded="request()->routeIs('admin.dashboard.users*')"  variant="outline">
+                {{--                 
+                    <flux:navlist.group expandable heading="Users" :expanded="request()->routeIs('admin.dashboard.users*')" icon="user-group"  variant="outline">
 
-                    <flux:navlist.item href="{{ route('admin.dashboard.users') }}" icon="user-group"  :current="request()->routeIs('admin.dashboard.users')" wire:navigate>All Users</flux:navlist.item>
-            
+                        <flux:navlist.item href="{{ route('admin.dashboard.users') }}" icon="user-group"  :current="request()->routeIs('admin.dashboard.users')" wire:navigate>All Users</flux:navlist.item>
+                
 
-                @can('create users')
+                        @can('create users')
+                            <flux:navlist.item href="{{ route('admin.dashboard.users.create') }}" icon="plus" :current="request()->routeIs('admin.dashboard.users.create')" wire:navigate>Add User</flux:navlist.item>
+                        @endcan
+                    </flux:navlist.group> 
+                --}}
+
+           
+
+            <flux:navlist variant="outline">
+                <flux:navlist.group heading="User Management" class="grid">
+                    <flux:navlist.item icon="user" :href="route('admin.dashboard.users')" :current="request()->routeIs('admin.dashboard.users')" wire:navigate>{{ __('Users') }}</flux:navlist.item>
+                    @can('create users')
                     <flux:navlist.item href="{{ route('admin.dashboard.users.create') }}" icon="plus" :current="request()->routeIs('admin.dashboard.users.create')" wire:navigate>Add User</flux:navlist.item>
                 @endcan
-            </flux:navlist.group>
+                </flux:navlist.group>
+            </flux:navlist>
+
+
             @endcan
 
 
+
             <flux:navlist variant="outline">
-                <flux:navlist.group heading="Roles and Permission" class="grid">
+                <flux:navlist.group heading="Roles and Permissions" class="grid">
                     <flux:navlist.item icon="finger-print" :href="route('admin.dashboard.roles')" :current="request()->routeIs('admin.dashboard.roles')" wire:navigate>{{ __('Roles') }}</flux:navlist.item>
+                    <flux:navlist.item icon="key" :href="route('admin.dashboard.permissions')" :current="request()->routeIs('admin.dashboard.permissions')" wire:navigate>{{ __('Permissions') }}</flux:navlist.item>
                 </flux:navlist.group>
             </flux:navlist>
+
+
 
 
             <flux:spacer />

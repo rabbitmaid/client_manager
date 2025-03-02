@@ -4,6 +4,7 @@ namespace App\Livewire\Dashboard\Admin\Users;
 
 use App\Models\User;
 use Livewire\Component;
+use Illuminate\Support\Facades\Auth;
 
 class Delete extends Component
 {
@@ -11,6 +12,11 @@ class Delete extends Component
 
     public function delete()
     {
+        // User cannot delete himself through the list
+        if(Auth::user()->id === $this->id){
+            return redirect(route('admin.dashboard.users'));
+        }
+
         $user = User::find($this->id);
         $roles = $user->getRoleNames();
 

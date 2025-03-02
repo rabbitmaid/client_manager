@@ -1,12 +1,15 @@
 <?php
 
+use App\Http\Controllers\Dashboard\Admin\OverviewController;
+use App\Http\Controllers\Dashboard\Admin\PermissionController;
 use Livewire\Volt\Volt;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\Admin\RoleController;
 use App\Http\Controllers\Dashboard\Admin\UserController;
 
 Route::get('/', function () {
-    return view('welcome');
+    // return view('welcome');
+    return redirect()->route('login');
 })->name('home');
 
 
@@ -19,7 +22,7 @@ Route::prefix('dashboard')->middleware(['auth', 'verified'])->group(function() {
 
 Route::prefix('admin')->middleware(['auth', 'verified'])->group(function() {
 
-    Route::view('', 'dashboard.admin.index')->name('admin.dashboard');
+    Route::get('', [OverviewController::class, 'index'])->name('admin.dashboard');
 
     Route::get('users', [UserController::class, 'index'])->name('admin.dashboard.users');
 
@@ -30,9 +33,11 @@ Route::prefix('admin')->middleware(['auth', 'verified'])->group(function() {
     Route::get('users/role/{id}', [UserController::class, 'role'])->name('admin.dashboard.users.role');
 
     Route::get('roles', [RoleController::class, 'index'])->name('admin.dashboard.roles');
-
     Route::get('roles/permissions/{id}', [RoleController::class, 'permission'])
-->name('admin.dashboard.roles.permission');
+    ->name('admin.dashboard.roles.permission');
+
+    Route::get('permissions', [PermissionController::class, 'index'])->name('admin.dashboard.permissions');
+
 
 });
     

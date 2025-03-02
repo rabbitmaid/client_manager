@@ -3,9 +3,12 @@ import "../css/datatables.css";
 
 document.addEventListener('livewire:navigated', () => {
     
-    const selectors = document.querySelectorAll('.dt-table');
-    selectors.forEach((selector) => {
-        let table = new DataTable(selector);
-    });
+        const selectors = document.querySelectorAll('.dt-table');
+        selectors.forEach((selector, index) => {
+            new DataTable(selector);
+            selector.setAttribute('wire:key', index);
+            selector.setAttribute('wire:ignore');
+        }); 
 
 });
+

@@ -1,12 +1,21 @@
 <x-layouts.app>
     <div class="flex h-full w-full flex-1 flex-col gap-4 rounded-xl">
         
-        <flux:heading size="xl" level="1">All Users</flux:heading>
-        <flux:subheading size="lg" class="mb-6">Manage all existing users</flux:subheading>
+        <div class="flex flex-col md:flex-row items-center justify-between gap-3 md:gap-0">
+            <div>
+                <flux:heading size="xl" level="1" class="text-center md:text-start">All Users</flux:heading>
+                <flux:subheading size="lg" class="mb-6">Manage all existing users</flux:subheading>
+            </div>
+
+            <div>
+                <flux:button href="{{ route('admin.dashboard.users.create') }}" wire:navigate='true' variant="primary" class="block uppercase text-xs font-semibold tracking-widest cursor-pointer">Add User</flux:button>
+            </div>
+        </div>
         <flux:separator variant="subtle" />
 
 
-        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+         <!--[if BLOCK]><![endif]-->
+        <div class="relative overflow-x-auto shadow-md sm:rounded-lg" wire:ignore>
 
             <table class="dt-table display" style="width:100%">
                 <thead>
@@ -64,7 +73,8 @@
                             </td>
                             <td>{{ $user->created_at->diffForHumans() }}</td>
                             <td>
-                           
+                                {{-- Admin cannot use this control on his or herself --}}
+                                @if(auth()->user()->id !== $user->id)
                                     <flux:dropdown>
                                     
                                             <flux:button icon-trailing="chevron-down"  class="cursor-pointer">
@@ -89,12 +99,13 @@
 
 
                                                 @can('delete users')
-                                                   <livewire:dashboard.admin.users.delete :id="$user->id" />
+                                                    <livewire:dashboard.admin.users.delete :id="$user->id" />
                                                 @endcan
                                                     
                                             </flux:menu>
                                     
                                     </flux:dropdown>
+                                @endif
                           
                             </td>
                         </tr>
@@ -121,7 +132,7 @@
             </table>
             
         </div>
-
+        <!--[if ENDBLOCK]><![endif]-->
 
     </div>
 </x-layouts.app>
